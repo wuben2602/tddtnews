@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "tddtnews"
+version = "0.1.0"
+description = "Newsletter for TDDT"
+authors = ["wuben2602 <wuben2602@utexas.edu>"]
+
+[tool.poetry.scripts]
+tddt = "tddtnews.tddtnews:main"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+google-api-python-client = "^2.21.0"
+google-auth-httplib2 = "^0.1.0"
+google-auth-oauthlib = "^0.4.6"
+
+[tool.poetry.dev-dependencies]
+yapf = "^0.31.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
