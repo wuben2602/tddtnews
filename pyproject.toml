@@ -5,7 +5,7 @@ description = "Newsletter for TDDT"
 authors = ["wuben2602 <wuben2602@utexas.edu>"]
 
 [tool.poetry.scripts]
-tddt = "tddtnews.tddtnews:main"
+tddt = "tddtnews.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.9"

@@ -1,2 +1,3 @@
-client_secret.json
+**/__pycache__
+credentials.json
 token.json

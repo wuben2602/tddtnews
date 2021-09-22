@@ -9,10 +9,9 @@ from google.oauth2.credentials import Credentials
 from urllib.error import HTTPError
 from email.mime.text import MIMEText
 
-# If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
-class EmailSender():
+class emailSender():
 
     def __init__(self):
         creds = None
@@ -48,13 +47,3 @@ class EmailSender():
             return message
         except HTTPError as error:
             print(f"An error occurred: {error}")
-
-
-def main():
-    sender = EmailSender()
-    with open("example.html", "r") as ex:
-        message = sender.create_message("ben@tddt.org", "ben@tddt.org", "test", "ben@tddt.org", ex.read())
-        sender.send_message("ben@tddt.org", message)
-
-if __name__ == '__main__':
-    main()
