@@ -6,12 +6,16 @@ authors = ["wuben2602 <wuben2602@utexas.edu>"]
 
 [tool.poetry.scripts]
 tddt = "tddtnews.main:main"
+render = "emailcreator.emailRender:main"
+sender = "emailsender.emailSender:main"
+parser = "calendarparser.calendarParser:main"
 
 [tool.poetry.dependencies]
 python = "^3.9"
 google-api-python-client = "^2.21.0"
 google-auth-httplib2 = "^0.1.0"
 google-auth-oauthlib = "^0.4.6"
+Jinja2 = "^3.0.2"
 
 [tool.poetry.dev-dependencies]
 yapf = "^0.31.0"
