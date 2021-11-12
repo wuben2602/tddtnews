@@ -7,6 +7,7 @@ from google.oauth2.credentials import Credentials
 class googleAuth:
     
     SCOPES = [
+        'https://www.googleapis.com/auth/drive.file',
         'https://www.googleapis.com/auth/gmail.send',
         'https://www.googleapis.com/auth/calendar.events.readonly'
     ]
