@@ -11,8 +11,7 @@ class emailSender():
 
     def __init__(self):
 
-        SCOPES = ['https://www.googleapis.com/auth/gmail.send']
-        auth = googleAuth(SCOPES)
+        auth = googleAuth()
         #Resource for interacting with API
         self.service = build('gmail', 'v1', credentials=auth.get_creds()) 
     

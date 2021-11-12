@@ -8,7 +8,7 @@ authors = ["wuben2602 <wuben2602@utexas.edu>"]
 tddt = "tddtnews.main:main"
 render = "emailcreator.emailRender:main"
 sender = "emailsender.emailSender:main"
-parser = "calendarparser.calendarParser:main"
+testparser = "calendarparser.calendarParser:main"
 
 [tool.poetry.dependencies]
 python = "^3.9"

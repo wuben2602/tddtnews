@@ -11,11 +11,27 @@
         
     </style>
     <body>
+        <div class="logo">
+            <img src="">
+        </div>
         <div class="title">
-            The New Lion Dance Beat (WIP)
+            <h1>The New Lion Dance Beat. Vol {{volume}} No {{number}}</h1>
+        </div>
+        <div class="week">
+            <p>{{date}}</p>
         </div>
         <div class="upcoming-performances">
-
+        <ul>
+            {% for event in events_list %}
+                <li class="event">
+                    <p>
+                    <b>{{event["summary"]}}</b><br>
+                    {{event["date"]}} <br>
+                    {{event["status"]}}
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
         </div>
 
     </body>

@@ -9,10 +9,9 @@ from dataclasses import dataclass
 class calendarParser():
 
     def __init__(self):
-
-        SCOPES = ['https://www.googleapis.com/auth/calendar.events.readonly']
-        auth = googleAuth(SCOPES)
-
+        
+        auth = googleAuth()
+        
         #Resource for interacting with API
         self.service = build('calendar', 'v3', credentials=auth.get_creds()) 
 
@@ -63,11 +62,12 @@ class calendarParser():
                 if person["responseStatus"] == "accepted":
                     status += 1
             
-            event_list.append(Event(summary, date, status))   
+            #event_list.append(Event(summary, date, status)) #for debugging purposes
+            event_list.append({"summary" : summary, "date" : date, "status" : status})
         return event_list
         
 @dataclass
-class Event():
+class Event(): # dataclass for pretty print debugging
     
     summary : str
     date : str
@@ -81,8 +81,13 @@ class Event():
         return retstr
 
 def main(): # tests CalendarParser
-    event_dict = dict()
+    # event_dict = dict()
+    # event_list = calendarParser().parse_events()
+    # for event in event_list:
+    #     event_dict[event.summary[:10]] = event.__dict__
+    # print(event_dict)
+    
     event_list = calendarParser().parse_events()
     for event in event_list:
-        event_dict[event.summary[:10]] = event.__dict__
-    print(event_dict)
+        print(event)
+        
