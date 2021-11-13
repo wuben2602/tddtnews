@@ -12,7 +12,9 @@
     </style>
     <body>
         <div class="logo">
-            <img src="">
+            {% with name="test2" %}
+                {% include "/parts/image.jinja" %}
+            {% endwith %}
         </div>
         <div class="title">
             <h1>The New Lion Dance Beat. Vol {{volume}} No {{number}}</h1>
