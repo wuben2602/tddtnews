@@ -14,14 +14,16 @@ class emailRender():
         self.template = self.template_loader.get_template(template)
 
     def render(self):
+        images = json.load(open("assets\images.json", "r"))
         date = datetime.today().strftime("%B %d, %Y")
         volume = self.__getinfo("volume")
         number = self.__getinfo("number")
         events = calendarParser().parse_events()
         render = self.template.render(
+            images = images,
+            date = date,
             volume = volume,
             number = number,
-            date = date,
             events_list = events
         )
         with open("test.html", "w") as f:

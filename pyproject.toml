@@ -9,6 +9,7 @@ tddt = "tddtnews.main:main"
 render = "emailcreator.emailRender:main"
 sender = "emailsender.emailSender:main"
 testparser = "calendarparser.calendarParser:main"
+imagehost = "imagehoster.imageHoster:main"
 
 [tool.poetry.dependencies]
 python = "^3.9"
