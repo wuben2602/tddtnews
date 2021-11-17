@@ -1,65 +1,54 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Lion Dance Beat</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="test.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-        href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap"
-        rel="stylesheet"
-        />
-        <link
-        rel="stylesheet"
-        href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
-        crossorigin="anonymous"
-        />
-    </head>
-    <body>
-        <div class="container">
-            <div class="logo">
-                {% with name="logo" %} 
-                    {% include "/parts/image.jinja" %} 
-                {% endwith %}
+<html style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+
+<body style="background-color: #dcdcdc;">
+    <table class="container" width="80%" style="background-color:white; margin: 0px 10%; padding: 5%; border: 5px solid #acacac50">
+        <tr class="logo"> <th>
+            {% with name="logo" %} 
+                {% include "/parts/image.jinja" %} 
+            {% endwith %}
+        </th> </tr>
+        <tr class="header box"> <th style="border: 2px solid #c42e38;margin: 1%;padding: 2%; text-align: center;">
+            <p class="team-name" style="margin: 0px;">Texas Dragon/Lion Dance Team</p>
+            <p class="title" style="margin: 0px; font-size: 200%; font-weight: bolder; color: #c42e38">
+                The New Lion Dance Beat. Vol {{ volume }} No {{ number }}
+            </p>
+            <p class="date" style="margin: 0px;">{{date}}</p>
+            <div class="socials" style="margin-top: 1%">
+                <a style="text-decoration: none" href="https://www.facebook.com/tddtaustin" target="_blank">
+                    <img style="width:20px; height:auto" src="https://drive.google.com/uc?export=view&id=17xe4jEdBhXQruI6yN_ImANzVuh8Ll9tO"/ alt="facebook">
+                </a>
+                <a style="text-decoration: none" href="https://www.instagram.com/tddtaustin/" target="_blank"> 
+                    <img style="width:20px; height:auto" src="https://drive.google.com/uc?export=view&id=1U7XExjpYXfu1zFivgHcnp5kIslOeVZtg"/ alt="instagram">
+                </a>
+                <a style="text-decoration: none" href="https://www.youtube.com/user/tddtatx" target="_blank">
+                    <img style="width:20px; height:auto" src="https://drive.google.com/uc?export=view&id=1eVno6c0VYMqvmtd4JafmjRL2P80as9xX"/ alt="youtube">
+                </a>
+                <a style="text-decoration: none" href="https://www.tddt.org/" target="_blank">
+                    <img style="width:20px; height:auto" src="https://drive.google.com/uc?export=view&id=1zXwAP-WRtgVpQkdf_oAdH9zOcr3-HhI0"/ alt="website">
+                </a>
             </div>
-            <div class="header box">
-                <p class="team-name">Texas Dragon/Lion Dance Team</p>
-                <p class="title">The New Lion Dance Beat. Vol {{ volume }} No {{ number }}</p>
-                <p class="date">{{ date }}</p>
-                <div class="socials">
-                    <a href="https://www.facebook.com/tddtaustin" target="_blank"
-                        ><i class="fab fa-facebook"></i
-                    ></a>
-                    <a href="https://www.instagram.com/tddtaustin/" target="_blank"
-                        ><i class="fab fa-instagram"></i
-                    ></a>
-                    <a href="https://www.youtube.com/user/tddtatx" target="_blank"
-                        ><i class="fab fa-youtube"></i
-                    ></a>
-                    <a href="https://www.tddt.org/" target="_blank"
-                        ><i class="fas fa-globe"></i
-                    ></a>
-                </div>
-            </div>
-            <div class="upcoming-events box">
-                <p class="subtitle">Upcoming Events</p>
-                <ul>
-                    {% for event in events_list %} 
-                        {% include "/parts/event.jinja" %} 
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="next-practice box">
-                <p class="subtitle">Next Practices</p>
-            </div>
-            <div class="other-news box">
-                <p class="subtitle">News</p>
-            </div>
-        </div>
-    </body>
+        </th></tr>
+        <tr class="upcoming-events box"> <th style="border: 2px solid #c42e38;margin: 1%;padding: 2%; text-align: center;">
+            <p class="subtitle" style="color: #c42e38;font-size: 150%;font-weight: bolder;"> 
+                Upcoming Events 
+            </p>
+            <ul style="list-style: none; margin: 0px; padding: 0px;">
+                {% for event in events_list %} 
+                    {% include "/parts/event.jinja" %} 
+                {% endfor %}
+            </ul>
+        </th></tr>
+        <tr class="next-practice box"> <th style="border: 2px solid #c42e38;margin: 1%;padding: 2%; text-align: center;">
+            <p class="subtitle" style="color: #c42e38;font-size: 150%;font-weight: bolder;"> 
+                Next Practices 
+            </p>
+        </th></tr>
+        <tr class="other-news box"> <th style="border: 2px solid #c42e38;margin: 1%;padding: 2%; text-align: center;">
+            <p class="subtitle" style="color: #c42e38;font-size: 150%;font-weight: bolder;"> 
+                News 
+            </p>
+        </th></tr>
+    </table>
+</body>
 </html>
