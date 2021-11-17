@@ -12,26 +12,20 @@
     </style>
     <body>
         <div class="logo">
-            {% with name="test2" %}
+            {% with name="logo" %}
                 {% include "/parts/image.jinja" %}
             {% endwith %}
         </div>
         <div class="title">
             <h1>The New Lion Dance Beat. Vol {{volume}} No {{number}}</h1>
         </div>
-        <div class="week">
+        <div class="date">
             <p>{{date}}</p>
         </div>
-        <div class="upcoming-performances">
+        <div class="upcoming-events">
         <ul>
             {% for event in events_list %}
-                <li class="event">
-                    <p>
-                    <b>{{event["summary"]}}</b><br>
-                    {{event["date"]}} <br>
-                    {{event["status"]}}
-                    </p>
-                </li>
+                {% include "/parts/event.jinja" %}
             {% endfor %}
         </ul>
         </div>

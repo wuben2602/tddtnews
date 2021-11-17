@@ -6,9 +6,9 @@ authors = ["wuben2602 <wuben2602@utexas.edu>"]
 
 [tool.poetry.scripts]
 publish = "tddtnews.tddtPublish:publish"
-render = "emailcreator.emailRender:main"
+testrender = "emailcreator.emailRender:test"
 sender = "emailsender.emailSender:main"
-testparser = "calendarparser.calendarParser:main"
+testparser = "calendarparser.calendarParser:test"
 imagehost = "imagehoster.imageHoster:main"
 
 [tool.poetry.dependencies]

@@ -1,0 +1,12 @@
+<li class="event">
+    <a href="{{event["link"]}}" target="_blank">
+        <h6>{{event["summary"]}}</h6>
+    </a>
+    <p>Date: {{event["date"]}}</p>
+    
+    {% if event["status"] %}
+        <p>Status: Confirmed</p>
+    {% else %}
+        <p>Status: Needs Action</p>  
+    {% endif %}
+</li>

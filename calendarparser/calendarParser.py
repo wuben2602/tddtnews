@@ -22,9 +22,9 @@ class calendarParser():
         time = str(datetime.strptime('18:30','%H:%M').strftime('%I:%M %p'))
         return month + " " + day + ", " + time
 
-    def __get_events(self):
+    def __get_events(self, days=30):
         minTime = datetime.now(timezone.utc).astimezone()
-        maxTime = minTime + timedelta(days=30)
+        maxTime = minTime + timedelta(days=days)
         return self.service.events().list(
             calendarId = "primary",
             orderBy = "startTime",
@@ -55,38 +55,32 @@ class calendarParser():
                 raw_time = event["start"]["date"]
                 t = datetime.strptime(raw_time, "%Y-%m-%d")
                 date = str(calendar.month_name[t.month]) + " " + str(t.day) + ", " + "All Day"
-
-            ### get status
-            status = 0
+                
+            ### get people
+            people = 0
             for person in event["attendees"]:
                 if person["responseStatus"] == "accepted":
-                    status += 1
+                    people += 1
+                    
+            ### get status
+            if "Confirmed" in event["description"] or "CONFIRMED" in event["description"]:
+                status = True
+            elif people >= 5:
+                status = True
+            else:
+                status = False
+
+            event_list.append(
+                {"summary" : summary,
+                 "date" : date,
+                 "people" : people,
+                 "status" : status,
+                 "link" : event["htmlLink"]
+                 })
             
-            #event_list.append(Event(summary, date, status)) #for debugging purposes
-            event_list.append({"summary" : summary, "date" : date, "status" : status})
         return event_list
-        
-@dataclass
-class Event(): # dataclass for pretty print debugging
-    
-    summary : str
-    date : str
-    status : int
 
-    def __str__(self):
-        retstr = ""
-        retstr += self.summary + "\n"
-        retstr += self.date + "\n"
-        retstr += "Acceptances: " + str(self.status)
-        return retstr
-
-def main(): # tests CalendarParser
-    # event_dict = dict()
-    # event_list = calendarParser().parse_events()
-    # for event in event_list:
-    #     event_dict[event.summary[:10]] = event.__dict__
-    # print(event_dict)
-    
+def test():
     event_list = calendarParser().parse_events()
     for event in event_list:
         print(event)

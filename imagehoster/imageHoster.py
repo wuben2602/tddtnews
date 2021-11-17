@@ -48,5 +48,4 @@ class Image:
             
 def main():
     host = imageHoster()
-    host.upload_image("test1", "images\\bad.jpg", "1lnDKA8Mc9cuQuj0FJImL-ZQlgKm8UCaw")
-    host.upload_image("test2", "images\\logo400x400.jpg", "1lnDKA8Mc9cuQuj0FJImL-ZQlgKm8UCaw")
+    host.upload_image("logo", "images\\logo400x400.jpg", "1lnDKA8Mc9cuQuj0FJImL-ZQlgKm8UCaw")

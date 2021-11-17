@@ -2,7 +2,7 @@ import os, argparse, json
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from calendarparser.calendarParser import calendarParser, Event
+from calendarparser.calendarParser import calendarParser
 
 class emailRender():
 
@@ -26,8 +26,6 @@ class emailRender():
             number = self.number,
             events_list = events
         )
-        #with open("test.html", "w") as f:
-            #f.write(render)
         return render
             
     def __getinfo(self, key):
@@ -37,9 +35,11 @@ class emailRender():
             except KeyError:
                 return None
 
-def main():
+def test():
     parser = argparse.ArgumentParser()
     parser.add_argument('template', type=str, help="name of the template to be rendered")
     args = parser.parse_args()
-    emailRender(args.template + ".jinja").render()
+    with open("test.html", "w") as f:
+        html = emailRender(args.template + ".jinja").render()
+        f.write(html)
     
