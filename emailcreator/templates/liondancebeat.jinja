@@ -1,34 +1,65 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Lion Dance Beat</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="test.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap"
+        rel="stylesheet"
+        />
+        <link
+        rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+        crossorigin="anonymous"
+        />
     </head>
-    <style>
-        
-    </style>
     <body>
-        <div class="logo">
-            {% with name="logo" %}
-                {% include "/parts/image.jinja" %}
-            {% endwith %}
+        <div class="container">
+            <div class="logo">
+                {% with name="logo" %} 
+                    {% include "/parts/image.jinja" %} 
+                {% endwith %}
+            </div>
+            <div class="header box">
+                <p class="team-name">Texas Dragon/Lion Dance Team</p>
+                <p class="title">The New Lion Dance Beat. Vol {{ volume }} No {{ number }}</p>
+                <p class="date">{{ date }}</p>
+                <div class="socials">
+                    <a href="https://www.facebook.com/tddtaustin" target="_blank"
+                        ><i class="fab fa-facebook"></i
+                    ></a>
+                    <a href="https://www.instagram.com/tddtaustin/" target="_blank"
+                        ><i class="fab fa-instagram"></i
+                    ></a>
+                    <a href="https://www.youtube.com/user/tddtatx" target="_blank"
+                        ><i class="fab fa-youtube"></i
+                    ></a>
+                    <a href="https://www.tddt.org/" target="_blank"
+                        ><i class="fas fa-globe"></i
+                    ></a>
+                </div>
+            </div>
+            <div class="upcoming-events box">
+                <p class="subtitle">Upcoming Events</p>
+                <ul>
+                    {% for event in events_list %} 
+                        {% include "/parts/event.jinja" %} 
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="next-practice box">
+                <p class="subtitle">Next Practices</p>
+            </div>
+            <div class="other-news box">
+                <p class="subtitle">News</p>
+            </div>
         </div>
-        <div class="title">
-            <h1>The New Lion Dance Beat. Vol {{volume}} No {{number}}</h1>
-        </div>
-        <div class="date">
-            <p>{{date}}</p>
-        </div>
-        <div class="upcoming-events">
-        <ul>
-            {% for event in events_list %}
-                {% include "/parts/event.jinja" %}
-            {% endfor %}
-        </ul>
-        </div>
-
     </body>
 </html>

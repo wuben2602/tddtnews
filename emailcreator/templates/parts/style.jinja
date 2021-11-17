@@ -1,0 +1,79 @@
+
+{# Jinja file containing default styling --> should be in the style tag #}
+
+/* Declared variables */
+:root {
+    --tddt-red: #c42e38;
+
+}
+
+html {
+    /* https://fonts.google.com/specimen/Shippori+Antique+B1?category=Sans+Serif,Monospace#standard-styles */
+    font-family: 'Shippori Antique B1', sans-serif;
+}
+
+body {
+    background-color: gainsboro;
+}
+
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    background-color:white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px 20%;
+    padding: 5%;
+}
+
+.header > * {
+    margin: 0px;
+}
+
+.title {
+    font-size: 200%;
+    font-weight: bolder;
+    color: var(--tddt-red)
+}
+
+.subtitle {
+    color: var(--tddt-red);
+    font-size: 150%;
+    font-weight: bolder;
+}
+
+.box {
+    border: solid var(--tddt-red);
+    margin: 1%;
+    padding: 2%
+}
+
+.box > * {
+    text-align: center;
+}
+
+/** EVENTS **/
+
+.event {
+    margin: 2%
+}
+
+.event > a {
+    font-weight: bold;
+}
+
+/** HREF **/
+
+a:link, a:visited {
+    color: var(--tddt-red)
+}
+
+a:hover, a:active {
+    color: var(--tddt-red);
+    opacity: 50%;
+}
