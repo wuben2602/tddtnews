@@ -5,7 +5,7 @@ description = "Newsletter for TDDT"
 authors = ["wuben2602 <wuben2602@utexas.edu>"]
 
 [tool.poetry.scripts]
-tddt = "tddtnews.main:main"
+publish = "tddtnews.tddtPublish:publish"
 render = "emailcreator.emailRender:main"
 sender = "emailsender.emailSender:main"
 testparser = "calendarparser.calendarParser:main"

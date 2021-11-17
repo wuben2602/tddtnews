@@ -23,7 +23,7 @@ class emailSender():
         message['cc'] = cc
         return {'raw': base64.urlsafe_b64encode(message.as_string().encode()).decode()}
 
-    def send_message(self, user_id, message):
+    def send_message(self, message, user_id="me"):
         try:
             message = (self.service.users().messages().send(userId=user_id, body=message)
                     .execute())

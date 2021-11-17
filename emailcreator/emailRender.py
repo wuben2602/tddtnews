@@ -11,23 +11,24 @@ class emailRender():
             loader=FileSystemLoader('emailcreator/templates/'),
             autoescape=select_autoescape(['html', 'xml'])
         )
+        self.volume = self.__getinfo("volume")
+        self.number = self.__getinfo("number")
         self.template = self.template_loader.get_template(template)
 
     def render(self):
         images = json.load(open("assets\images.json", "r"))
         date = datetime.today().strftime("%B %d, %Y")
-        volume = self.__getinfo("volume")
-        number = self.__getinfo("number")
         events = calendarParser().parse_events()
         render = self.template.render(
             images = images,
             date = date,
-            volume = volume,
-            number = number,
+            volume = self.volume,
+            number = self.number,
             events_list = events
         )
-        with open("test.html", "w") as f:
-            f.write(render)
+        #with open("test.html", "w") as f:
+            #f.write(render)
+        return render
             
     def __getinfo(self, key):
         with open("assets\info.json", "r") as info:
