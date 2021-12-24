@@ -1,12 +1,18 @@
 
 from emailcreator.emailRender import emailRender
 from emailsender.emailSender import emailSender
+from tddtgui.app import TDDTGui
 
 import argparse
 
-
 def publish():
-    
+    """ generates newsletter and sends it to the proper addresses.
+        This is almost the same as the publish function called by TDDTGui and
+        functions as the CLI version of this application
+
+    Raises:
+        TDDTEmailException: 
+    """
     # get arguments
     parser = argparse.ArgumentParser()
     parser.add_argument('template', type=str, help="template to be emailed out")
@@ -41,11 +47,16 @@ def publish():
         )
     )
     
-    # update volume and number
-        
+    # update volume and number TODO
+
+def gui():
+    tddtgui = TDDTGui()
+    tddtgui.start()
+    
 class TDDTEmailException(Exception):
     
     def __init__(self, email):
         self.email = email
         message = "TDDTEmailException: " + self.email + " doesn't come in the form of email@tddt.org"
         super().__init__(message)
+        
