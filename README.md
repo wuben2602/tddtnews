@@ -2,32 +2,26 @@
 
 This is a suite of tools used for the creation and sending of newsletters specifically for Texas Dragon/Lion Dance Team, located in Austin, TX
 
---- 
-
-## Development Rules
-1. Branches should follow the format `username\branch_name` such as `wuben2602\example_branch`
-2. It's recommended to create one's own branch `username` to develop in to avoid editing `main`
-3. Feature requests should be made in Issues with the `enhancement` label
-
 ---
 
-## Features to Add
+#### Version 1.0 Beta
 
-1. Create HTML Template
-2. Schedule Scrapper
-3. Automatic Email Sender
-4. Unsubscribe service
-5. CSV file with data
-6. Google Drive Image Hosting?
+This is the first and latest release of tddtnews. It is rough around the edges and may be full of bugs. Despite this, it works for a lot of situations and will be extensively tested before releasing the alpha version
 
---- 
-
-## Parts
-
-tbd
+##### Features:
+- auto-updating preview that lets you see what the newsletter looks like before you publish
+- automatically searches out for events in the next 2 months, so no need to manually type those events in
+- an image hoster function is included, which automatically uploads public images to your google drive (adding images to the newsletter will be added in a later update)
+- a news adder function lets you easily add your own written sections to the newsletter
 
 ---
+#### Installing Dependencies
+I haven't tested these steps on a different device, but in theory, this is how you would run the application
 
-## How To
-
-tbd
+1. install poetry following instructions at https://python-poetry.org/docs/#installation
+2. open **cmd** and run `git clone https://github.com/wuben2602/tddtnews.git` (needs a github account)
+3. navigate to the folder created by step 2 and run `tddtgui.bat` in windows or `tddtgui.sh` in mac/linux
+---
+#### Contributing
+1. new issues can be created if you have a github account at https://github.com/wuben2602/tddtnews
+2. email issues to ben@tddt.org
