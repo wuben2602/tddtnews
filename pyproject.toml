@@ -5,10 +5,10 @@ description = "Newsletter for TDDT"
 authors = ["wuben2602 <wuben2602@utexas.edu>"]
 
 [tool.poetry.scripts]
-publish = "tddtnews.tddtPublish:publish"
-render = "emailcreator.emailRender:main"
-sender = "emailsender.emailSender:main"
-testparser = "calendarparser.calendarParser:main"
+publish = "tddtnews.main:publish"
+gui = "tddtnews.main:gui"
+testrender = "emailcreator.emailRender:test"
+testparser = "calendarparser.calendarParser:test"
 imagehost = "imagehoster.imageHoster:main"
 
 [tool.poetry.dependencies]
@@ -17,6 +17,8 @@ google-api-python-client = "^2.21.0"
 google-auth-httplib2 = "^0.1.0"
 google-auth-oauthlib = "^0.4.6"
 Jinja2 = "^3.0.2"
+PyQt6 = "^6.2.2"
+PyQt6-WebEngine = "^6.2.1"
 
 [tool.poetry.dev-dependencies]
 yapf = "^0.31.0"

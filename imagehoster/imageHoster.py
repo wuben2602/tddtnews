@@ -5,7 +5,7 @@ from googleapiclient.http import MediaFileUpload
 
 import json
 
-class imageHoster:
+class ImageHoster:
 
     def __init__(self):
 
@@ -13,9 +13,9 @@ class imageHoster:
         #Resource for interacting with API
         self.service = build('drive', 'v3', credentials=auth.get_creds()) 
         
-    def upload_image(self, name, path, folder_id):
+    def upload_image(self, name, path) -> bool:
         
-        image = Image(name, path, self.service, folder_id)
+        image = Image(name, path, self.service)
         with open("assets\images.json", "r") as f:
             try:
                 img_dict = json.load(f)
@@ -27,26 +27,24 @@ class imageHoster:
             img_dict[image.name] = image.id
             json.dump(img_dict, f, sort_keys=True)
             return True
-    
-    def upload_image_dir(self, name, path):
-        pass
 
 class Image:
       
-    def __init__(self, name, path, service, folder_id):
+    def __init__(self, name, path, service):
         self.name = name
         self.path = path
         try:
-            file_metadata = {'name': self.name, 'parents':[folder_id]}
+            file_metadata = {'name': self.name}
             media = MediaFileUpload(self.path)
             file = service.files().create(body=file_metadata,
                                                 media_body=media,
                                                 fields='id').execute()
+            permissions = { "role": "reader", "type": "anyone" }
             self.id = file.get("id")
+            service.permissions().create(fileId=self.id, body=permissions).execute()
         except:
             self.id = None
             
 def main():
-    host = imageHoster()
-    host.upload_image("test1", "images\\bad.jpg", "1lnDKA8Mc9cuQuj0FJImL-ZQlgKm8UCaw")
-    host.upload_image("test2", "images\\logo400x400.jpg", "1lnDKA8Mc9cuQuj0FJImL-ZQlgKm8UCaw")
+    host = ImageHoster()
+    host.upload_image("logo", r"C:\Users\Benjamin\Desktop\Projects\Python\TDDTNews\images\logo400x400.jpg")
