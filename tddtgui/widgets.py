@@ -34,13 +34,15 @@ class TDDTPreviewWindow(QWidget):
         self.renderer.update()
         self.browser.setHtml(self.renderer.render())
     
-    def add_new_event(self, event : dict):
-        self.renderer.add_news(event)
+    def add_new_event(self, event : dict) -> bool:
+        result = self.renderer.add_news(event)
         self.browser.setHtml(self.renderer.render())
+        return result
         
-    def remove_event(self, title : str):
-        self.renderer.remove_news(title)
+    def remove_event(self, title : str) -> bool:
+        result = self.renderer.remove_news(title)
         self.browser.setHtml(self.renderer.render())
+        return result
         
 class TDDTSidebarMenu(QWidget):
     

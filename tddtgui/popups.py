@@ -32,7 +32,6 @@ class CreateEventDialog(QDialog):
     def submit_handler(self):
         title = self.title.text()
         content = self.content.document().toPlainText().lstrip().rstrip()
-        print(content)
         if not title:
             TDDTErrorBox("Title is empty").show()
         elif not content:
@@ -56,5 +55,17 @@ class TDDTErrorBox(QMessageBox):
         self.setStandardButtons(QMessageBox.StandardButton.Ok)
         self.setDefaultButton(QMessageBox.StandardButton.Ok)
     
+    def show(self):
+        return self.exec()
+
+class TDDTSuccessBox(QMessageBox):
+    
+    def __init__(self, msg):
+        super().__init__()
+        self.setText("Success:")
+        self.setInformativeText(msg)
+        self.setStandardButtons(QMessageBox.StandardButton.Ok)
+        self.setDefaultButton(QMessageBox.StandardButton.Ok)
+
     def show(self):
         return self.exec()

@@ -1,7 +1,9 @@
-import sys
+import sys, os
 from PyQt6.QtWidgets import QApplication, QFileDialog, QHBoxLayout, QWidget
+
 from tddtgui.widgets import TDDTPreviewWindow,TDDTSidebarMenu, ActionTypes
-from tddtgui.popups import CreateEventDialog, TDDTErrorBox
+from tddtgui.popups import CreateEventDialog, TDDTErrorBox, TDDTSuccessBox
+from imagehoster.imageHoster import ImageHoster
 
 class TDDTGui:
     
@@ -44,13 +46,35 @@ class TDDTMainWindow(QWidget):
         if type == ActionTypes.UPDATECALENDAR:
             self.preview_widget.update()
         elif type == ActionTypes.CREATEEVENT:
-            dialog = CreateEventDialog()
-            if dialog.exec():
-                self.preview_widget.add_new_event(dialog.response) 
-            else:
+            try:
+                dialog = CreateEventDialog()
+                if dialog.exec():
+                    if self.preview_widget.add_new_event(dialog.response):
+                        TDDTSuccessBox("Successfully created new event!").show()
+                    else:
+                        raise Exception
+                else:
+                    raise Exception
+            except:
                 TDDTErrorBox("Something went wrong. Try Again!").show()
         elif type == ActionTypes.HOSTIMAGE:
-            pass     
+            try:
+                dialog = QFileDialog()
+                dialog.setFileMode(QFileDialog.FileMode.ExistingFiles)
+                dialog.setMimeTypeFilters(["image/jpeg","image/png"])
+                if dialog.exec():
+                    filenames = dialog.selectedFiles()
+                    if filenames:
+                        hoster = ImageHoster()
+                        for file in filenames:
+                            name = os.path.split(file)[-1].split(".")[0]
+                            if not hoster.upload_image(name, file):
+                                raise Exception
+                        TDDTSuccessBox("Successfully hosted image(s)!").show()    
+                else:
+                    raise Exception
+            except:
+                TDDTErrorBox("Couldn't host images. Try Again!").show()
         elif type == ActionTypes.PUBLISH:
             pass #TODO: publish main code
         
