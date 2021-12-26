@@ -2,8 +2,9 @@ import sys, os
 from PyQt6.QtWidgets import QApplication, QFileDialog, QHBoxLayout, QWidget
 
 from tddtgui.widgets import TDDTPreviewWindow,TDDTSidebarMenu, ActionTypes
-from tddtgui.popups import CreateEventDialog, TDDTErrorBox, TDDTSuccessBox
+from tddtgui.popups import CreateEventDialog, PublishNewsletterDialog, TDDTErrorBox, TDDTSuccessBox
 from imagehoster.imageHoster import ImageHoster
+from emailsender.emailSender import emailSender
 
 class TDDTGui:
     
@@ -76,5 +77,26 @@ class TDDTMainWindow(QWidget):
             except:
                 TDDTErrorBox("Couldn't host images. Try Again!").show()
         elif type == ActionTypes.PUBLISH:
-            pass #TODO: publish main code
+            try:
+                dialog = PublishNewsletterDialog()
+                if dialog.exec():
+                    emails = ",".join(dialog.email_list)
+                    publish_info = self.preview_widget.get_publish_info()
+                    subject = f"The New Lion Dance Beat. Vol {publish_info['volume']} No {publish_info['number']}"
+                    sender = emailSender()
+                    sender.send_message(
+                        sender.create_message(
+                            emails, # comma seperated list of email addresses to send to
+                            None, # sender - should be none
+                            subject, # subject
+                            None, # ccs - should be none
+                            publish_info["html"]
+                        )
+                    )
+                    TDDTSuccessBox("Successfully published newsletter!").show()
+                else:
+                    raise Exception
+            except:
+                TDDTErrorBox("Couldn't publish newsletter. Try Again!").show()
+                
         

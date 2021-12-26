@@ -43,6 +43,15 @@ class TDDTPreviewWindow(QWidget):
         result = self.renderer.remove_news(title)
         self.browser.setHtml(self.renderer.render())
         return result
+    
+    def get_publish_info(self) -> dict:
+        self.update()
+        return {
+            "volume": self.renderer.volume, 
+            "number": self.renderer.number,
+            "html": self.renderer.render()
+        }
+        
         
 class TDDTSidebarMenu(QWidget):
     
