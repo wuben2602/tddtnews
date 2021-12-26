@@ -36,6 +36,10 @@
             <ul style="list-style: none; margin: 0px; padding: 0px;">
                 {% for event in events_list %} 
                     {% include "/parts/event.jinja" %} 
+                {% else %}
+                    <li class="event" style="margin: 2%">
+                        No Upcoming Events!
+                    </li>
                 {% endfor %}
             </ul>
         </th></tr>
@@ -45,7 +49,11 @@
             </p>
             <ul style="list-style: none; margin: 0px; padding: 0px;">
                 {% for news in news_list %} 
-                    {% include "/parts/news.jinja" %} 
+                    {% include "/parts/news.jinja" %}
+                {% else %}
+                    <li class="event" style="margin: 2%">
+                        No News this Week!
+                    </li>
                 {% endfor %}
             </ul>
         </th></tr>

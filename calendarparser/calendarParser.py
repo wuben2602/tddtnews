@@ -22,7 +22,7 @@ class calendarParser():
         time = str(datetime.strptime('18:30','%H:%M').strftime('%I:%M %p'))
         return month + " " + day + ", " + time
 
-    def __get_events(self, days=30):
+    def __get_events(self, days=60):
         minTime = datetime.now(timezone.utc).astimezone()
         maxTime = minTime + timedelta(days=days)
         return self.service.events().list(
