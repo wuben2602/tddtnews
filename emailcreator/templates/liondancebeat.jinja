@@ -39,15 +39,15 @@
                 {% endfor %}
             </ul>
         </th></tr>
-        <tr class="next-practice box"> <th style="border: 2px solid #c42e38;margin: 1%;padding: 2%; text-align: center;">
-            <p class="subtitle" style="color: #c42e38;font-size: 150%;font-weight: bolder;"> 
-                Next Practices 
-            </p>
-        </th></tr>
         <tr class="other-news box"> <th style="border: 2px solid #c42e38;margin: 1%;padding: 2%; text-align: center;">
             <p class="subtitle" style="color: #c42e38;font-size: 150%;font-weight: bolder;"> 
-                News 
+                News
             </p>
+            <ul style="list-style: none; margin: 0px; padding: 0px;">
+                {% for news in news_list %} 
+                    {% include "/parts/news.jinja" %} 
+                {% endfor %}
+            </ul>
         </th></tr>
     </table>
 </body>

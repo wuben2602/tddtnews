@@ -31,15 +31,16 @@ class CreateEventDialog(QDialog):
     
     def submit_handler(self):
         title = self.title.text()
-        html = self.content.document().toHtml()
+        content = self.content.document().toPlainText().lstrip().rstrip()
+        print(content)
         if not title:
             TDDTErrorBox("Title is empty").show()
-        elif not html:
+        elif not content:
             TDDTErrorBox("Content is empty").show()
         else:
             self.response = {
                 "title" : title,
-                "html" : html
+                "content" : content
             }
             self.accept()
     

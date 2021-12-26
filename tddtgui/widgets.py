@@ -1,12 +1,21 @@
 from PyQt6.QtWidgets import QPushButton, QVBoxLayout, QWidget 
 from PyQt6.QtWebEngineWidgets import QWebEngineView
+from PyQt6.QtCore import pyqtSignal as Signal
+from enum import Enum
 
-from tddtgui.popups import CreateEventDialog
+from emailcreator.emailRender import emailRender
 
+class ActionTypes(Enum):
+    UPDATECALENDAR = 1,
+    CREATEEVENT = 2,
+    HOSTIMAGE = 3,
+    PUBLISH = 4
+    
 class TDDTPreviewWindow(QWidget):
     
-    def __init__(self):
+    def __init__(self, template="liondancebeat"):
         super().__init__()
+        self.renderer = emailRender(template + ".jinja")
         self.configure()
         self.show()
     
@@ -17,13 +26,29 @@ class TDDTPreviewWindow(QWidget):
         self.setLayout(layout_preview)
         
         # add html viewer
-        browser = QWebEngineView()
-        html = open(r"C:\Users\Benjamin\Desktop\Projects\Python\TDDTNews\test.html", "r", encoding="utf-8").read()
-        browser.setHtml(html)
-        layout_preview.addWidget(browser)
+        self.browser = QWebEngineView()
+        self.browser.setHtml(self.renderer.render())
+        layout_preview.addWidget(self.browser)
+
+    def update(self):
+        self.renderer.update()
+        self.browser.setHtml(self.renderer.render())
+    
+    def add_new_event(self, event : dict):
+        self.renderer.add_news(event)
+        self.browser.setHtml(self.renderer.render())
+        
+    def remove_event(self, title : str):
+        self.renderer.remove_news(title)
+        self.browser.setHtml(self.renderer.render())
         
 class TDDTSidebarMenu(QWidget):
     
+    update_calendar_signal = Signal(ActionTypes)
+    add_event_signal = Signal(ActionTypes)
+    host_image_signal = Signal(ActionTypes)
+    publish_signal = Signal(ActionTypes)
+        
     def __init__(self):
         super().__init__()
         self.configure()
@@ -35,38 +60,19 @@ class TDDTSidebarMenu(QWidget):
         # update calendar
         updatecalendar = QPushButton("Update Calendar")
         layout_sidebar.addWidget(updatecalendar)
+        updatecalendar.clicked.connect(lambda : self.update_calendar_signal.emit(ActionTypes.UPDATECALENDAR))
         
         # add new event
         createevent = QPushButton("Add New Event")
         layout_sidebar.addWidget(createevent)
-        createevent.clicked.connect(self.create_event_handler)
+        createevent.clicked.connect(lambda : self.add_event_signal.emit(ActionTypes.CREATEEVENT))
         
         # host image
         hostimage = QPushButton("Host New Image")
         layout_sidebar.addWidget(hostimage)
-        
-        # previews document -> updates preview
-        preview = QPushButton("Preview HTML")
-        layout_sidebar.addWidget(preview)
+        hostimage.clicked.connect(lambda: self.host_image_signal.emit(ActionTypes.HOSTIMAGE))
         
         # publishes document -> publish
         publish = QPushButton("Publish NewsLetter")
         layout_sidebar.addWidget(publish)
-    
-    def update_calendar_handler(self): # no popup dialog
-        pass
-    
-    def create_event_handler(self): # unique popup dialog
-        dialog = CreateEventDialog()
-        if dialog.exec():
-            print(dialog.response)
-
-    def host_image_handler(self): # file popup
-        pass
-    
-    def preview_handler(self): # no popup dialog
-        pass
-    
-    def publish_handler(self): # are you sure popup dialog
-        pass
-    
+        publish.clicked.connect(lambda: self.publish_signal.emit(ActionTypes.PUBLISH))
