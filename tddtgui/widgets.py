@@ -45,7 +45,7 @@ class TDDTPreviewWindow(QWidget):
         return result
     
     def get_publish_info(self) -> dict:
-        self.update()
+        self.update()   
         return {
             "volume": self.renderer.volume, 
             "number": self.renderer.number,

@@ -31,7 +31,7 @@ class TDDTMainWindow(QWidget):
         
         # sidebar
         self.sidebar_widget = TDDTSidebarMenu()
-        layout_frame.addWidget(self.sidebar_widget)
+        layout_frame.addWidget(self.sidebar_widget, 25)
         [signal.connect(self.event_handler) for signal in [
             self.sidebar_widget.update_calendar_signal,
             self.sidebar_widget.add_event_signal,
@@ -41,7 +41,7 @@ class TDDTMainWindow(QWidget):
         
         # preview
         self.preview_widget = TDDTPreviewWindow()
-        layout_frame.addWidget(self.preview_widget)
+        layout_frame.addWidget(self.preview_widget, 75)
     
     def event_handler(self, type : ActionTypes):
         if type == ActionTypes.UPDATECALENDAR:

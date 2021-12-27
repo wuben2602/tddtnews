@@ -28,7 +28,7 @@ class emailRender():
         return render
     
     def add_news(self, news : str) -> bool:
-        if isinstance(news, dict) and "title" in news and "content" in news:
+        if isinstance(news, dict) and "title" in news and "content" in news and "image" in news:
             self.news.append(news)
             return True
         else:
