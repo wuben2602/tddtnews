@@ -1,3 +1,3 @@
 @echo off
-poetry run gui
+poetry install | poetry run gui
 exit

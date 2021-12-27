@@ -1,8 +1,15 @@
 <li class="news">
-    <h4 style="font-weight: bold; color: #c42e38; margin-bottom: 0px">
+    <h3 style="font-weight: bold; color: #c42e38; margin-bottom: 0px">
         {{news["title"]}}
-    </h4>
-    <p style="font-weight: normal; margin-top:2%">
+    </h3>
+    {% if news["image"] != "None" %}
+        <div>
+            {% with name=news["image"] %} 
+                {% include "/parts/image.jinja" %} 
+            {% endwith %}
+        </div>
+    {% endif %}
+    <p style="font-weight: normal; margin-top:2%; font-size: 120%">
         {{news["content"]}}
     </p>
 </li>

@@ -1,9 +1,18 @@
-from PyQt6.QtWidgets import QDialog, QLabel, QLineEdit, QMessageBox, QPushButton, QTextEdit, QVBoxLayout
+import json
+from json.decoder import JSONDecodeError
+from PyQt6.QtWidgets import QComboBox, QDialog, QLabel, QLineEdit, QMessageBox, QPushButton, QTextEdit, QVBoxLayout
 
 class CreateEventDialog(QDialog):
     
     def __init__(self):
         super().__init__()
+        
+        with open("assets\images.json", "r") as f:
+            try:
+                self.img_dict = json.load(f)
+            except JSONDecodeError:
+                self.img_dict = dict()  
+        
         self.configure()
         self.response = None
         
@@ -18,6 +27,12 @@ class CreateEventDialog(QDialog):
         content_label = QLabel("Content:")
         self.content = QTextEdit()
         
+        # populate drop down menu with images
+        choose_image_label = QLabel("Add Image:")
+        self.choose_image = QComboBox()
+        self.choose_image.addItem("None")
+        self.choose_image.addItems([key for key in sorted(self.img_dict)])
+        
         submit = QPushButton("Submit")
         submit.clicked.connect(self.submit_handler)
         submit.setDefault(True)
@@ -25,12 +40,22 @@ class CreateEventDialog(QDialog):
         cancel = QPushButton("Cancel")
         cancel.clicked.connect(self.cancel_handler)
         
-        [layout_createevent.addWidget(i) for i in [title_label,self.title, content_label, self.content, submit, cancel]]
+        [layout_createevent.addWidget(i) for i in [
+            title_label,
+            self.title, 
+            content_label, 
+            self.content,
+            choose_image_label,
+            self.choose_image,  
+            submit, 
+            cancel
+            ]]
         self.setLayout(layout_createevent)
-    
+        
     def submit_handler(self):
         title = self.title.text()
         content = self.content.document().toPlainText().strip()
+        image = self.choose_image.currentText()
         if not title:
             TDDTErrorBox("Title is empty").show()
         elif not content:
@@ -38,7 +63,8 @@ class CreateEventDialog(QDialog):
         else:
             self.response = {
                 "title" : title,
-                "content" : content
+                "content" : content,
+                "image" : image
             }
             self.accept()
     
@@ -115,7 +141,7 @@ class TDDTVerifyBox(QMessageBox):
     
     def __init__(self, msg):
         super().__init__()
-        self.setText("Is this correct?:")
+        self.setText("Is this correct:")
         self.setInformativeText(msg)
         self.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
         self.setDefaultButton(QMessageBox.StandardButton.Yes)
