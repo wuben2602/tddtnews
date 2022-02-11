@@ -58,8 +58,6 @@ class CreateEventDialog(QDialog):
         image = self.choose_image.currentText()
         if not title:
             TDDTErrorBox("Title is empty").show()
-        elif not content:
-            TDDTErrorBox("Content is empty").show()
         else:
             self.response = {
                 "title" : title,

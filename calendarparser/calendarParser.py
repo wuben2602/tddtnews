@@ -19,7 +19,7 @@ class calendarParser():
         month = str(calendar.month_name[date.month])
         day = str(date.day)
         time = str(date.hour) + ":" + str(date.minute)
-        time = str(datetime.strptime('18:30','%H:%M').strftime('%I:%M %p'))
+        time = str(datetime.strptime(time,'%H:%M').strftime('%I:%M %p'))
         return month + " " + day + ", " + time
 
     def __get_events(self, days=60):
@@ -42,7 +42,7 @@ class calendarParser():
             summary = event["summary"]
             if summary[:2] == "!!":
                 continue
-            if summary.lower() == "team practice":
+            if summary.lower() == "team practice" or summary.lower() == "tddt practice":
                 continue
             
             ### get date
@@ -63,7 +63,7 @@ class calendarParser():
                     people += 1
                     
             ### get status
-            if "Confirmed" in event["description"] or "CONFIRMED" in event["description"]:
+            if "description" in event and ("Confirmed" in event["description"] or "CONFIRMED" in event["description"]):
                 status = True
             elif people >= 5:
                 status = True
@@ -74,7 +74,7 @@ class calendarParser():
                 {"summary" : summary,
                  "date" : date,
                  "people" : people,
-                 "status" : status,
+                 "status" : status, 
                  "link" : event["htmlLink"]
                  })
             
@@ -84,4 +84,3 @@ def test():
     event_list = calendarParser().parse_events()
     for event in event_list:
         print(event)
-        

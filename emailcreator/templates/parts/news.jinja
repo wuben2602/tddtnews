@@ -1,5 +1,5 @@
 <li class="news">
-    <h3 style="font-weight: bold; color: #c42e38; margin-bottom: 0px">
+    <h3 style="font-weight: bold; color: #ff0f0f; margin-bottom: 0px">
         {{news["title"]}}
     </h3>
     {% if news["image"] != "None" %}
@@ -9,7 +9,9 @@
             {% endwith %}
         </div>
     {% endif %}
-    <p style="font-weight: normal; margin-top:2%; font-size: 120%">
-        {{news["content"]}}
-    </p>
+    {% if news["content"] %}
+        <p style="font-weight: normal; margin-top:2%; font-size: 120%">
+            {{news["content"]}}
+        </p>
+    {% endif %}
 </li>
